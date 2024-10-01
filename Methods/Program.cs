@@ -1,85 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Methods;
 
-namespace Methods
+Calculator();
+
+
+void Calculator()
 {
-    internal class Calculator
+    Console.Clear();
+    Console.WriteLine("Select Option");
+    Console.WriteLine("1 : Square");
+    Console.WriteLine("2 : Rectangle");
+    Console.WriteLine("3 : Circle");
+    Console.WriteLine("4 : Exit");
+
+    int choice = Convert.ToInt32(Console.ReadLine());
+
+    try
     {
-        public Calculator()
+        switch (choice)
         {
-            Console.WriteLine("Select Option");
-            Console.WriteLine("1 : Square");
-            Console.WriteLine("2 : Rectangle");
-            Console.WriteLine("3 : Circle");
-            Console.WriteLine("4 : Exit");
+            case 1:
+                Console.WriteLine("Enter side length");
+                double side = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Area of sqaure: " + SquareArea((double)side));
+                Console.ReadKey();
+                Calculator();
+                break;
 
-            int choice = Convert.ToInt32(Console.ReadLine());
+            case 2:
+                Console.WriteLine("Enter length");
+                double length = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter height");
+                double height = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Area of rectangle: " + RectArea(length, height));
+                Console.WriteLine("Perimeter of rectangle: " + RectPerim(length, height));
+                Console.ReadKey();
+                Calculator();
+                break;
 
-            try
-            {
-                switch (choice)
-                {
-                    default:
-                    case 1:
-                        Console.WriteLine("Enter side length");
-                        double side = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine(SquareArea(side));
-                        break;
+            case 3:
+                Console.WriteLine("Enter radius");
+                double radius = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Area of circle: " + CircleArea(radius));
+                Console.ReadKey();
+                Calculator();
+                break;
 
-                    case 2:
-                        Console.WriteLine("Enter length");
-                        double length = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Enter height");
-                        double height = Convert.ToDouble(Console.ReadLine());
-                        break;
+            case 4:
+                Environment.Exit(0);
+                break;
 
-                    case 3:
-                        Console.WriteLine("Enter radius");
-                        double radius = Convert.ToDouble(Console.ReadLine());
-                        break;
+            default:
+                Console.Clear();
+                Console.WriteLine("Invalid input, try again.");
+                Calculator(); 
+                break;
 
-                }
-            }
-            catch (FormatException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-            }
         }
-        public static double SquareArea(double side)
-        {
-            return side * side;
-        }
-
-        public static double SquarePerim(double side)
-        {
-            return side * 4;
-        }
-
-        public static double RectArea(double lenght, double height)
-        {
-            return lenght * height;
-        }
-
-        public static double RectPerim(double lenght, double height)
-        {
-            return (lenght + height * 2);
-        }
-
-        public static double CircleArea(double radius)
-        {
-            return double.Pi * radius;
-        }
-
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
+    }
+    catch (OverflowException ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
+    }
+    catch (ArgumentOutOfRangeException ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
     }
 }
+static double SquareArea(double side)
+{
+    return side * side;
+}
+
+static double SquarePerim(double side)
+{
+    return side * 4;
+}
+
+static double RectArea(double lenght, double height)
+{
+    return lenght * height;
+}
+
+static double RectPerim(double lenght, double height)
+{
+    return (lenght + height * 2);
+}
+
+static double CircleArea(double radius)
+{
+    return double.Pi * radius;
+}
+
