@@ -1,97 +1,62 @@
-﻿using Methods;
+﻿/*
+ * COM326 - Week 2
+ * Harvey Vance
+ * 01/10/2024
+ * Version 1
+ */
 
-Calculator();
-
-
-void Calculator()
+Main();
+void Main()
 {
-    Console.Clear();
-    Console.WriteLine("Select Option");
-    Console.WriteLine("1 : Square");
-    Console.WriteLine("2 : Rectangle");
-    Console.WriteLine("3 : Circle");
-    Console.WriteLine("4 : Exit");
-
-    int choice = Convert.ToInt32(Console.ReadLine());
-
-    try
+    int option;
+    do
     {
-        switch (choice)
-        {
-            case 1:
-                Console.WriteLine("Enter side length");
-                double side = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Area of sqaure: " + SquareArea((double)side));
-                Console.ReadKey();
-                Calculator();
-                break;
+        PrintMethod();
+        option = InputOption();
+        string message = GetMessage(option);
+        Console.WriteLine($"You selected option {option}.");
+    } while (option != 0);
+}
 
-            case 2:
-                Console.WriteLine("Enter length");
-                double length = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Enter height");
-                double height = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Area of rectangle: " + RectArea(length, height));
-                Console.WriteLine("Perimeter of rectangle: " + RectPerim(length, height));
-                Console.ReadKey();
-                Calculator();
-                break;
+static void PrintMethod()
+{
+    Console.WriteLine("Please enter a valid option from below");
+    Console.WriteLine("1 : Hello in French");
+    Console.WriteLine("2 : Hello in Spanish");
+    Console.WriteLine("3 : Hello in German");
+    Console.WriteLine("4 : Hello in Italian");
+    Console.WriteLine("0 : Exit application");
+}
 
-            case 3:
-                Console.WriteLine("Enter radius");
-                double radius = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Area of circle: " + CircleArea(radius));
-                Console.ReadKey();
-                Calculator();
-                break;
+static int InputOption()
+{
+    Console.Write("Enter your choice:");
+    string userInput = Console.ReadLine();
+    int option;
 
-            case 4:
-                Environment.Exit(0);
-                break;
-
-            default:
-                Console.Clear();
-                Console.WriteLine("Invalid input, try again.");
-                Calculator(); 
-                break;
-
-        }
+    while (!int.TryParse(userInput, out option) || option < 0 || option > 4)
+    {
+        Console.Write("Invalid input.");
+        userInput = Console.ReadLine();
     }
-    catch (FormatException ex)
+
+    return option;
+}
+
+static string GetMessage(int option)
+{
+    switch (option)
     {
-        Console.WriteLine($"Error: {ex.Message}");
-    }
-    catch (OverflowException ex)
-    {
-        Console.WriteLine($"Error: {ex.Message}");
-    }
-    catch (ArgumentOutOfRangeException ex)
-    {
-        Console.WriteLine($"Error: {ex.Message}");
+        case 1:
+            return "Bonjour!";
+        case 2:
+            return "¡Hola!";
+        case 3:
+            return "Hallo!";
+        case 4:
+            return "Ciao!";
+        default:
+            return "Invalid option.";
+
     }
 }
-static double SquareArea(double side)
-{
-    return side * side;
-}
-
-static double SquarePerim(double side)
-{
-    return side * 4;
-}
-
-static double RectArea(double lenght, double height)
-{
-    return lenght * height;
-}
-
-static double RectPerim(double lenght, double height)
-{
-    return (lenght + height * 2);
-}
-
-static double CircleArea(double radius)
-{
-    return double.Pi * radius;
-}
-
